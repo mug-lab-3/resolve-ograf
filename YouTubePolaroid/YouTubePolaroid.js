@@ -1,7 +1,7 @@
 /**
  * YouTubePolaroid.js
  * 
- * A professional OGraf sample demonstrating:
+ * A OGraf sample demonstrating:
  * 1. Web API Integration (YouTube oEmbed)
  * 2. Multi-stage state-driven animations
  * 3. Dynamic layout handling (1-line vs 2-line title detection)
@@ -139,15 +139,15 @@ class YouTubePolaroid extends HTMLElement {
       const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
       const response = await fetch(oembedUrl);
       if (!response.ok) throw new Error("Failed");
-      
+
       const data = await response.json();
-      
+
       this._elements.thumbnail.onload = () => {
         this._elements.status.style.display = "none";
       };
       this._elements.thumbnail.src = data.thumbnail_url;
       this._elements.title.textContent = data.title;
-      
+
       // Wait for layout to calculate line count for sequential animation
       setTimeout(() => {
         this._isTwoLines = this._elements.title.offsetHeight > 60;
@@ -195,12 +195,12 @@ class YouTubePolaroid extends HTMLElement {
    */
   async goToTime(time) {
     const seconds = (time?.timestamp ?? 0) / 1000;
-    
+
     // Stage 1: Polaroid Entry (0.0s - 0.8s)
     const entryProgress = Math.min(seconds / 0.8, 1);
     const easeEntry = 1 - Math.pow(1 - entryProgress, 4);
-    const rotation = (this._lastAngle - 15) + (15 * easeEntry); 
-    
+    const rotation = (this._lastAngle - 15) + (15 * easeEntry);
+
     this._elements.polaroid.style.opacity = String(Math.min(easeEntry * 2, 1));
     this._elements.polaroid.style.transform = `translateX(${-1000 * (1 - easeEntry)}px) rotate(${rotation}deg) scale(${0.8 + 0.2 * easeEntry})`;
 
@@ -211,7 +211,7 @@ class YouTubePolaroid extends HTMLElement {
       const blur = (10 * (1 - easeDev)).toFixed(1);
       const contrast = (0.5 + 0.5 * easeDev).toFixed(2);
       const brightness = (0.2 + 0.8 * easeDev).toFixed(2);
-      
+
       this._elements.thumbnail.style.opacity = String(easeDev);
       this._elements.thumbnail.style.filter = `blur(${blur}px) contrast(${contrast}) brightness(${brightness}) saturate(${contrast})`;
     } else {
@@ -222,7 +222,7 @@ class YouTubePolaroid extends HTMLElement {
     if (seconds > 3.5) {
       const writeProgress = Math.min((seconds - 3.5) / 1.0, 1);
       this._elements.title.style.opacity = "1";
-      
+
       if (!this._isTwoLines) {
         // Single Line Sweep
         const right = (writeProgress * 100).toFixed(1);
