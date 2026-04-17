@@ -1,13 +1,13 @@
 {
-  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
-  "id": "com.mug.lifecycle-monitor",
   "version": "1.0.0",
-  "name": "Lifecycle Monitor",
-  "description": "A debug tool to monitor OGraf lifecycle events in DaVinci Resolve.",
+  "type": "ograf",
+  "id": "com.mug.event-monitor",
+  "name": "OGraf Event Monitor",
+  "description": "A debug tool to monitor OGraf events in DaVinci Resolve.",
   "author": {
     "name": "Mug Lab"
   },
-  "main": "LifecycleMonitor.js",
+  "main": "EventMonitor.js",
   "duration": 10,
   "stepCount": 1,
   "supportsRealTime": false,
@@ -64,5 +64,6 @@
       },
       "frameRate": { "ideal": 30 }
     }
-  ]
+  ],
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json"
 }

@@ -1,7 +1,7 @@
 /**
- * LifecycleMonitor.js
+ * EventMonitor.js
  * 
- * A straightforward debug tool to visualize OGraf lifecycle events.
+ * A straightforward debug tool to visualize OGraf events.
  * This version uses plain, explicit code for maximum readability as a sample.
  */
 
@@ -15,8 +15,8 @@ const styles = `
   --accent-load: #00ffaa;
   --accent-update: #00aaff;
   --accent-goto: #ff00ff;
-  --accent-custom: #ffcc00;
-  --accent-info: #ff9900;
+  --accent-custom: #ffd700;
+  --accent-info: #aaaaaa;
   color: #ffffff;
   background: transparent;
   pointer-events: none;
@@ -29,13 +29,13 @@ const styles = `
   left: 20px;
   width: calc(100% - 40px);
   height: calc(100% - 40px);
-  background: rgba(10, 15, 25, 0.7);
+  background: rgba(10, 15, 25, 0.85);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 5px 20px;
   box-sizing: border-box;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7),
               inset 0 0 20px rgba(255, 255, 255, 0.02);
   overflow: hidden;
   display: flex;
@@ -49,7 +49,7 @@ const styles = `
   align-items: center;
   margin-bottom: 0;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 #header h1 {
@@ -59,22 +59,22 @@ const styles = `
   letter-spacing: 2px;
   font-weight: 700;
   color: #fff;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 #notice-box {
-  background: rgba(255, 153, 0, 0.1);
-  border: 1px solid rgba(255, 153, 0, 0.4);
+  background: rgba(255, 85, 0, 0.08);
+  border: 1px solid rgba(255, 85, 0, 0.4);
   border-radius: 6px;
-  padding: 6px 12px;
+  padding: 8px 16px;
   margin: 10px 0 20px 0;
   font-size: 18px;
   line-height: 1.3;
-  color: #ffcc00;
+  color: #ff8855;
 }
 
 #notice-box b {
-  color: #ff9900;
+  color: #ff5500;
   text-transform: uppercase;
   margin-right: 10px;
 }
@@ -129,7 +129,7 @@ const styles = `
 .monitor-content::-webkit-scrollbar { display: none; }
 `;
 
-class LifecycleMonitor extends HTMLElement {
+class EventMonitor extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -142,7 +142,7 @@ class LifecycleMonitor extends HTMLElement {
       <style>${styles}</style>
       <div id="container">
         <div id="header">
-          <h1>OGraf Lifecycle Monitor</h1>
+          <h1>OGraf Event Monitor</h1>
         </div>
         
         <div id="notice-box">
@@ -290,4 +290,4 @@ class LifecycleMonitor extends HTMLElement {
   }
 }
 
-export default LifecycleMonitor;
+export default EventMonitor;
