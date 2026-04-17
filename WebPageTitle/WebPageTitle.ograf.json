@@ -1,0 +1,61 @@
+{
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+  "id": "com.mug.web-page-title",
+  "version": "1.0.0",
+  "name": "Web Page Style Title",
+  "description": "A high-end title graphic designed like a modern website landing page.",
+  "author": {
+    "name": "Mug Lab"
+  },
+  "main": "WebPageTitle.js",
+  "duration": 5,
+  "stepCount": 1,
+  "supportsRealTime": false,
+  "supportsNonRealTime": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "logoName": {
+        "type": "string",
+        "title": "Site Logo Name",
+        "default": "WEB GRAPHICS"
+      },
+      "heroTitle": {
+        "type": "string",
+        "title": "Hero Title",
+        "default": "BUILT WITH HTML & CSS"
+      },
+      "heroSubText": {
+        "type": "string",
+        "title": "Hero Sub-text",
+        "default": "Rendered by Chromium, powered by OGraf. Seamlessly integrated into the DaVinci Resolve timeline."
+      },
+      "accentColor": {
+        "type": "string",
+        "title": "Accent Color",
+        "gddType": "color-rrggbb",
+        "pattern": "^#[0-9a-f]{6}$",
+        "default": "#2563eb"
+      },
+      "showNavigation": {
+        "type": "boolean",
+        "title": "Show Navigation Bar",
+        "default": true
+      },
+      "darkTheme": {
+        "type": "boolean",
+        "title": "Dark Theme",
+        "default": true
+      }
+    }
+  },
+  "renderRequirements": [
+    {
+      "resolution": {
+        "width": { "ideal": 1920 },
+        "height": { "ideal": 1080 }
+      },
+      "frameRate": { "ideal": 30 }
+    }
+  ]
+}
