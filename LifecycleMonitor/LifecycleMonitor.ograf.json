@@ -1,0 +1,68 @@
+{
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+  "id": "com.mug.lifecycle-monitor",
+  "version": "1.0.0",
+  "name": "Lifecycle Monitor",
+  "description": "A debug tool to monitor OGraf lifecycle events in DaVinci Resolve.",
+  "author": {
+    "name": "Mug Lab"
+  },
+  "main": "LifecycleMonitor.js",
+  "duration": 10,
+  "stepCount": 1,
+  "supportsRealTime": false,
+  "supportsNonRealTime": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "sampleText": {
+        "type": "string",
+        "title": "Sample Text",
+        "default": "Edit me"
+      },
+      "sampleNumber": {
+        "type": "number",
+        "title": "Sample Number (Float)",
+        "minimum": 0,
+        "maximum": 100,
+        "default": 42
+      },
+      "sampleInteger": {
+        "type": "integer",
+        "title": "Sample Integer",
+        "minimum": 0,
+        "maximum": 1000,
+        "default": 100
+      },
+      "sampleColor": {
+        "type": "string",
+        "title": "Sample Color (RGBA)",
+        "gddType": "color-rrggbbaa",
+        "pattern": "^#[0-9a-f]{8}$",
+        "default": "#00f2ff80"
+      },
+      "sampleToggle": {
+        "type": "boolean",
+        "title": "Sample Toggle",
+        "default": true
+      }
+    }
+  },
+  "customActions": [
+    {
+      "id": "ping",
+      "name": "Send Ping",
+      "description": "Triggers customAction with a ping ID",
+      "schema": null
+    }
+  ],
+  "renderRequirements": [
+    {
+      "resolution": {
+        "width": { "ideal": 1920 },
+        "height": { "ideal": 1080 }
+      },
+      "frameRate": { "ideal": 30 }
+    }
+  ]
+}
