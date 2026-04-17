@@ -1,0 +1,50 @@
+{
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+  "id": "com.mug.youtube-polaroid",
+  "version": "1.0.0",
+  "name": "YouTube Polaroid",
+  "description": "Fetches YouTube metadata and displays it as a Polaroid photo.",
+  "author": {
+    "name": "Mug Lab"
+  },
+  "main": "YouTubePolaroid.js",
+  "duration": 8,
+  "stepCount": 1,
+  "supportsRealTime": false,
+  "supportsNonRealTime": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "youtubeUrl": {
+        "type": "string",
+        "title": "YouTube Video URL",
+        "default": "https://www.youtube.com/watch?v=CYV-SUYfthE"
+      },
+      "polaroidAngle": {
+        "type": "number",
+        "title": "Rotation Angle",
+        "minimum": -30,
+        "maximum": 30,
+        "default": -5
+      }
+    }
+  },
+  "customActions": [
+    {
+      "id": "fetch",
+      "name": "Fetch Info",
+      "description": "Manually fetch YouTube metadata for the current URL",
+      "schema": null
+    }
+  ],
+  "renderRequirements": [
+    {
+      "resolution": {
+        "width": { "ideal": 1920 },
+        "height": { "ideal": 1080 }
+      },
+      "frameRate": { "ideal": 30 },
+      "accessToPublicInternet": { "ideal": true }
+    }
+  ]
+}
