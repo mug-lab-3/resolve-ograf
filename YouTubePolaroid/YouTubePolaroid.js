@@ -115,8 +115,8 @@ class YouTubePolaroid extends HTMLElement {
       status: this.shadowRoot.getElementById("status")
     };
 
-    this._lastUrl = "";
-    this._lastAngle = -5;
+    this._currentUrl = "";
+    this._currentAngle = -5;
     this._isTwoLines = false;
     this._isFirstUpdate = true; // Flag to detect the initial updateAction from Resolve
   }
@@ -167,15 +167,15 @@ class YouTubePolaroid extends HTMLElement {
   }
 
   _applyState(state) {
-    if (state.youtubeUrl && state.youtubeUrl !== this._lastUrl) {
-      this._lastUrl = state.youtubeUrl;
+    if (state.youtubeUrl && state.youtubeUrl !== this._currentUrl) {
+      this._currentUrl = state.youtubeUrl;
       this._elements.status.textContent = "Press Fetch Button";
       this._elements.status.style.display = "block";
       this._elements.thumbnail.style.opacity = "0";
       this._elements.title.textContent = "";
     }
     if (state.polaroidAngle !== undefined) {
-      this._lastAngle = state.polaroidAngle;
+      this._currentAngle = state.polaroidAngle;
     }
   }
 
@@ -183,11 +183,11 @@ class YouTubePolaroid extends HTMLElement {
 
   async load(params) {
     this._applyState(params.data || {});
-    if (this._lastUrl) {
+    if (this._currentUrl) {
       // Synchronize fetch with a timeout for stable rendering in Resolve
       try {
         await Promise.race([
-          this._fetchYouTubeData(this._lastUrl, true),
+          this._fetchYouTubeData(this._currentUrl, true),
           new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 3000))
         ]);
       } catch (e) {
@@ -198,9 +198,9 @@ class YouTubePolaroid extends HTMLElement {
   }
 
   async updateAction(params) {
-    const urlBefore = this._lastUrl;
+    const urlBefore = this._currentUrl;
     this._applyState(params.data || {});
-    const urlAfter = this._lastUrl;
+    const urlAfter = this._currentUrl;
 
     // Auto-fetch only on the very first updateAction if the URL changed from the default in load()
     if (this._isFirstUpdate) {
@@ -213,15 +213,16 @@ class YouTubePolaroid extends HTMLElement {
   }
 
   async customAction(params) {
-    if (params.id === "fetch" && this._lastUrl) {
-      await this._fetchYouTubeData(this._lastUrl);
+    if (params.id === "fetch" && this._currentUrl) {
+      await this._fetchYouTubeData(this._currentUrl);
     }
     return { statusCode: 200 };
   }
 
   /**
    * Main Animation Loop
-   * Total Duration: 8s (0-0.8: Entry, 0.8-3.5: Dev, 3.5-4.5: Write, 4.5-7.5: Linger, 7.5-8.0: Outro)
+   * Total Duration: 8s
+   * Stages: 0-0.8: Entry, 0.8-2.3: Dev, 2.3-3.3: Write, 3.3-7.5: Linger, 7.5-8.0: Outro
    */
   async goToTime(time) {
     const seconds = (time?.timestamp ?? 0) / 1000;
@@ -229,14 +230,14 @@ class YouTubePolaroid extends HTMLElement {
     // Stage 1: Polaroid Entry (0.0s - 0.8s)
     const entryProgress = Math.min(seconds / 0.8, 1);
     const easeEntry = 1 - Math.pow(1 - entryProgress, 4);
-    const rotation = (this._lastAngle - 15) + (15 * easeEntry);
+    const rotation = (this._currentAngle - 15) + (15 * easeEntry);
 
     this._elements.polaroid.style.opacity = String(Math.min(easeEntry * 2, 1));
     this._elements.polaroid.style.transform = `translateX(${-1000 * (1 - easeEntry)}px) rotate(${rotation}deg) scale(${0.8 + 0.2 * easeEntry})`;
 
-    // Stage 2: Image Development (0.8s - 3.5s)
+    // Stage 2: Image Development (0.8s - 2.3s)
     if (seconds > 0.8) {
-      const devProgress = Math.min((seconds - 0.8) / 2.7, 1);
+      const devProgress = Math.min((seconds - 0.8) / 1.5, 1);
       const easeDev = Math.pow(devProgress, 1.5);
       const blur = (10 * (1 - easeDev)).toFixed(1);
       const contrast = (0.5 + 0.5 * easeDev).toFixed(2);
@@ -248,9 +249,9 @@ class YouTubePolaroid extends HTMLElement {
       this._elements.thumbnail.style.opacity = "0";
     }
 
-    // Stage 3: Sequential Writing (3.5s - 4.5s)
-    if (seconds > 3.5) {
-      const writeProgress = Math.min((seconds - 3.5) / 1.0, 1);
+    // Stage 3: Sequential Writing (2.3s - 3.3s)
+    if (seconds > 2.3) {
+      const writeProgress = Math.min((seconds - 2.3) / 1.0, 1);
       this._elements.title.style.opacity = "1";
 
       if (!this._isTwoLines) {
