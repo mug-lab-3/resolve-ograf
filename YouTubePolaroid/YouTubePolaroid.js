@@ -118,13 +118,14 @@ class YouTubePolaroid extends HTMLElement {
     this._lastUrl = "";
     this._lastAngle = -5;
     this._isTwoLines = false;
+    this._isFirstUpdate = true; // Flag to detect the initial updateAction from Resolve
   }
 
   // --- Helpers ---
 
-  async _fetchYouTubeData(url) {
+  async _fetchYouTubeData(url, force = false) {
     const now = Date.now();
-    if (this._lastFetchTime && (now - this._lastFetchTime < 5000)) {
+    if (!force && this._lastFetchTime && (now - this._lastFetchTime < 5000)) {
       this._elements.status.textContent = "Please wait...";
       return;
     }
@@ -142,16 +143,24 @@ class YouTubePolaroid extends HTMLElement {
 
       const data = await response.json();
 
-      this._elements.thumbnail.onload = () => {
-        this._elements.status.style.display = "none";
-      };
+      const imgLoad = new Promise((resolve) => {
+        this._elements.thumbnail.onload = () => {
+          this._elements.status.style.display = "none";
+          resolve();
+        };
+        this._elements.thumbnail.onerror = () => {
+          this._elements.status.textContent = "Thumbnail Error";
+          resolve();
+        };
+      });
+
       this._elements.thumbnail.src = data.thumbnail_url;
       this._elements.title.textContent = data.title;
 
-      // Wait for layout to calculate line count for sequential animation
-      setTimeout(() => {
-        this._isTwoLines = this._elements.title.offsetHeight > 60;
-      }, 50);
+      // Update layout state
+      this._isTwoLines = this._elements.title.offsetHeight > 60;
+
+      await imgLoad;
     } catch (err) {
       this._elements.status.textContent = "Error: Video Not Found";
     }
@@ -174,11 +183,32 @@ class YouTubePolaroid extends HTMLElement {
 
   async load(params) {
     this._applyState(params.data || {});
+    if (this._lastUrl) {
+      // Synchronize fetch with a timeout for stable rendering in Resolve
+      try {
+        await Promise.race([
+          this._fetchYouTubeData(this._lastUrl, true),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 3000))
+        ]);
+      } catch (e) {
+        console.warn("YouTube metadata fetch failed or timed out during load:", e);
+      }
+    }
     return { statusCode: 200 };
   }
 
   async updateAction(params) {
+    const urlBefore = this._lastUrl;
     this._applyState(params.data || {});
+    const urlAfter = this._lastUrl;
+
+    // Auto-fetch only on the very first updateAction if the URL changed from the default in load()
+    if (this._isFirstUpdate) {
+      this._isFirstUpdate = false;
+      if (urlAfter && urlAfter !== urlBefore) {
+        await this._fetchYouTubeData(urlAfter, true);
+      }
+    }
     return { statusCode: 200 };
   }
 
