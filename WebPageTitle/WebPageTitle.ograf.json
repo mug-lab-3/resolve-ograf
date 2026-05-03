@@ -1,6 +1,6 @@
 {
   "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
-  "id": "com.mug.web-page-title",
+  "id": "com.mug-lab.web-page-title",
   "version": "1.0.0",
   "name": "Web Page Style Title",
   "description": "A high-end title graphic designed like a modern website landing page.",

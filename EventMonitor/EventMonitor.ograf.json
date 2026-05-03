@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "type": "ograf",
-  "id": "com.mug.event-monitor",
+  "id": "com.mug-lab.event-monitor",
   "name": "OGraf Event Monitor",
   "description": "A debug tool to monitor OGraf events in DaVinci Resolve.",
   "author": {

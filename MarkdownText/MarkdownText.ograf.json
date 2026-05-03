@@ -1,6 +1,6 @@
 {
   "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
-  "id": "io.github.mug.MarkdownText",
+  "id": "com.mug-lab.MarkdownText",
   "version": "1.0.0",
   "name": "MarkdownText",
   "main": "MarkdownText.js",

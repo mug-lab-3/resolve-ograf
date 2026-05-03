@@ -1,6 +1,6 @@
 {
   "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
-  "id": "com.mug.youtube-polaroid",
+  "id": "com.mug-lab.youtube-polaroid",
   "version": "1.0.0",
   "name": "YouTube Polaroid",
   "description": "Fetches YouTube metadata and displays it as a Polaroid photo.",
