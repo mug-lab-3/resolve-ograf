@@ -26,6 +26,8 @@ export default class MarkdownText extends HTMLElement {
         --font-scale: 3vh;
         --background-scale-x: 1;
         --background-scale-y: 1;
+        --background-offset-x: 0vh;
+        --background-offset-y: 0vh;
         --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", Helvetica, Arial, sans-serif;
         color: var(--text-color);
         font-family: var(--font-family);
@@ -43,7 +45,7 @@ export default class MarkdownText extends HTMLElement {
         inset: 0;
         background-color: var(--background-color);
         border-radius: var(--border-radius);
-        transform: scale(var(--background-scale-x), var(--background-scale-y));
+        transform: translate(var(--background-offset-x), var(--background-offset-y)) scale(var(--background-scale-x), var(--background-scale-y));
         z-index: 0;
       }
       .content {
@@ -170,7 +172,7 @@ export default class MarkdownText extends HTMLElement {
   async setActionsSchedule(schedule) { return { statusCode: 200 }; }
 
   _applyState() {
-    if (this._state.markdownText) {
+    if (this._state.markdownText !== undefined) {
       this._content.innerHTML = marked.parse(this._state.markdownText);
     }
     if (this._state.fontFamily !== undefined) {
@@ -178,7 +180,7 @@ export default class MarkdownText extends HTMLElement {
       const fontValue = this._state.fontFamily.trim() ? `${this._state.fontFamily}, ${fallbackFonts}` : fallbackFonts;
       this.style.setProperty("--font-family", fontValue);
     }
-    if (this._state.textColor) {
+    if (this._state.textColor !== undefined) {
       this.style.setProperty("--text-color", this._state.textColor);
     }
     if (this._state.backgroundColor !== undefined) {
@@ -198,6 +200,12 @@ export default class MarkdownText extends HTMLElement {
     }
     if (this._state.backgroundScaleY !== undefined) {
       this.style.setProperty("--background-scale-y", this._state.backgroundScaleY);
+    }
+    if (this._state.backgroundOffsetX !== undefined) {
+      this.style.setProperty("--background-offset-x", (this._state.backgroundOffsetX * 50) + "vh");
+    }
+    if (this._state.backgroundOffsetY !== undefined) {
+      this.style.setProperty("--background-offset-y", (this._state.backgroundOffsetY * 50) + "vh");
     }
   }
 }

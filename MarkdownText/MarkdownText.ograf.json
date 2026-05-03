@@ -79,6 +79,20 @@
         "default": 1.0,
         "minimum": 0.0,
         "maximum": 5.0
+      },
+      "backgroundOffsetX": {
+        "type": "number",
+        "title": "Background Offset X",
+        "default": 0.0,
+        "minimum": -1.0,
+        "maximum": 1.0
+      },
+      "backgroundOffsetY": {
+        "type": "number",
+        "title": "Background Offset Y",
+        "default": 0.0,
+        "minimum": -1.0,
+        "maximum": 1.0
       }
     }
   }
