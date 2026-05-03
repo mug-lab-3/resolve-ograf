@@ -22,6 +22,11 @@
         "gddType": "multi-line",
         "default": "# H1\n\n**Bold**  \n*italic*  \n~~Strikethrough~~  \n`inline code`\n\n> Blockquote\n\n---\n\n- Item1\n- Item2\n\n1. Number 1\n2. Number 2\n\n| Column 1 | Column 2 |\n| -------- | -------- |\n| Text 1   | Text 2   |\n"
       },
+      "fontFamily": {
+        "type": "string",
+        "title": "Font Family",
+        "default": "Arial"
+      },
       "textColor": {
         "type": "string",
         "title": "Text Color",

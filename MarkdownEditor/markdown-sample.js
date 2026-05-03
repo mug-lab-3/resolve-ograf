@@ -26,8 +26,9 @@ export default class MarkdownGraphic extends HTMLElement {
         --font-scale: 3vh;
         --background-scale-x: 1;
         --background-scale-y: 1;
+        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         color: var(--text-color);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        font-family: var(--font-family);
         line-height: 1.5;
         word-wrap: break-word;
       }
@@ -171,6 +172,11 @@ export default class MarkdownGraphic extends HTMLElement {
   _applyState() {
     if (this._state.markdownText) {
       this._content.innerHTML = marked.parse(this._state.markdownText);
+    }
+    if (this._state.fontFamily !== undefined) {
+      const fallbackFonts = '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
+      const fontValue = this._state.fontFamily.trim() ? `${this._state.fontFamily}, ${fallbackFonts}` : fallbackFonts;
+      this.style.setProperty("--font-family", fontValue);
     }
     if (this._state.textColor) {
       this.style.setProperty("--text-color", this._state.textColor);
