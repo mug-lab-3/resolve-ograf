@@ -1,0 +1,74 @@
+{
+  "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
+  "id": "io.github.mug.markdown-sample",
+  "version": "1.0.0",
+  "name": "Mug Markdown Text",
+  "main": "markdown-sample.js",
+  "supportsRealTime": false,
+  "supportsNonRealTime": true,
+  "renderRequirements": [
+    {
+      "accessToPublicInternet": {
+        "ideal": false
+      }
+    }
+  ],
+  "schema": {
+    "type": "object",
+    "properties": {
+      "mdText": {
+        "type": "string",
+        "title": "Markdown Text",
+        "gddType": "multi-line",
+        "default": "# H1\n## H2\n\n**Bold**  \n*italic*  \n~~Strikethrough~~\n\n---\n\n- Item1\n- Item2\n\n| Column 1 | Column 2 |\n| -------- | -------- |\n| Text 1   | Text 2   |\n"
+      },
+      "textColor": {
+        "type": "string",
+        "title": "Text Color",
+        "gddType": "color-rrggbb",
+        "default": "#ffffff"
+      },
+      "bgColor": {
+        "type": "string",
+        "title": "Background Color",
+        "gddType": "color-rrggbbaa",
+        "default": "#00000080"
+      },
+      "borderRadius": {
+        "type": "number",
+        "title": "Border Radius",
+        "default": 0.02,
+        "minimum": 0.0,
+        "maximum": 1.0
+      },
+      "scaleAll": {
+        "type": "number",
+        "title": "Overall Scale",
+        "default": 1.0,
+        "minimum": 0.0,
+        "maximum": 5.0
+      },
+      "fontScale": {
+        "type": "number",
+        "title": "Font Scale",
+        "default": 1.0,
+        "minimum": 0.0,
+        "maximum": 5.0
+      },
+      "bgScaleX": {
+        "type": "number",
+        "title": "Background Scale X",
+        "default": 1.0,
+        "minimum": 0.0,
+        "maximum": 5.0
+      },
+      "bgScaleY": {
+        "type": "number",
+        "title": "Background Scale Y",
+        "default": 1.0,
+        "minimum": 0.0,
+        "maximum": 5.0
+      }
+    }
+  }
+}
