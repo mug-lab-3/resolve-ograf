@@ -3,7 +3,13 @@
   "id": "com.mug-lab.MarkdownText",
   "version": "1.0.0",
   "name": "MarkdownText",
+  "description": "Markdown text renderer for DaVinci Resolve.",
+  "author": {
+    "name": "Mug Lab"
+  },
   "main": "MarkdownText.js",
+  "duration": 10,
+  "stepCount": 1,
   "supportsRealTime": false,
   "supportsNonRealTime": true,
   "renderRequirements": [
