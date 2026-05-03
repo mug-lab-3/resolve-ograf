@@ -1,6 +1,6 @@
 import { marked } from './marked.js';
 
-export default class MarkdownGraphic extends HTMLElement {
+export default class MarkdownText extends HTMLElement {
   constructor() {
     super();
 

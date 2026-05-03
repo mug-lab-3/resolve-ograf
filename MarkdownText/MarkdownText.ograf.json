@@ -1,9 +1,9 @@
 {
   "$schema": "https://ograf.ebu.io/v1/specification/json-schemas/graphics/schema.json",
-  "id": "io.github.mug.markdown-sample",
+  "id": "io.github.mug.MarkdownText",
   "version": "1.0.0",
-  "name": "Mug Markdown Text",
-  "main": "markdown-sample.js",
+  "name": "MarkdownText",
+  "main": "MarkdownText.js",
   "supportsRealTime": false,
   "supportsNonRealTime": true,
   "renderRequirements": [
