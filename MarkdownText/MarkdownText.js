@@ -26,7 +26,7 @@ export default class MarkdownText extends HTMLElement {
         --font-scale: 3vh;
         --background-scale-x: 1;
         --background-scale-y: 1;
-        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", Helvetica, Arial, sans-serif;
         color: var(--text-color);
         font-family: var(--font-family);
         line-height: 1.5;
@@ -174,7 +174,7 @@ export default class MarkdownText extends HTMLElement {
       this._content.innerHTML = marked.parse(this._state.markdownText);
     }
     if (this._state.fontFamily !== undefined) {
-      const fallbackFonts = '-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif';
+      const fallbackFonts = '-apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", "Yu Gothic", Helvetica, Arial, sans-serif';
       const fontValue = this._state.fontFamily.trim() ? `${this._state.fontFamily}, ${fallbackFonts}` : fallbackFonts;
       this.style.setProperty("--font-family", fontValue);
     }
