@@ -19,13 +19,13 @@ export default class MarkdownGraphic extends HTMLElement {
         --text-color: #c9d1d9; /* GitHub Dark Mode Text Default */
         --border-color: rgba(255, 255, 255, 0.2);
         --link-color: #58a6ff;
-        --bg-color: transparent;
+        --background-color: transparent;
         --border-radius: 0px;
         --code-bg: rgba(110, 118, 129, 0.4);
         --scale-all: 1;
-        --font-scale: 1;
-        --bg-scale-x: 1;
-        --bg-scale-y: 1;
+        --font-scale: 3vh;
+        --background-scale-x: 1;
+        --background-scale-y: 1;
         color: var(--text-color);
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         line-height: 1.5;
@@ -40,9 +40,9 @@ export default class MarkdownGraphic extends HTMLElement {
       .background {
         position: absolute;
         inset: 0;
-        background-color: var(--bg-color);
+        background-color: var(--background-color);
         border-radius: var(--border-radius);
-        transform: scale(var(--bg-scale-x), var(--bg-scale-y));
+        transform: scale(var(--background-scale-x), var(--background-scale-y));
         z-index: 0;
       }
       .content {
@@ -52,7 +52,7 @@ export default class MarkdownGraphic extends HTMLElement {
         box-sizing: border-box;
         padding: 3vh;
         text-align: left;
-        font-size: calc(3vh * var(--font-scale));
+        font-size: var(--font-scale);
       }
       .content > *:first-child { margin-top: 0; }
       .content > *:last-child { margin-bottom: 0; }
@@ -169,14 +169,14 @@ export default class MarkdownGraphic extends HTMLElement {
   async setActionsSchedule(schedule) { return { statusCode: 200 }; }
 
   _applyState() {
-    if (this._state.mdText) {
-      this._content.innerHTML = marked.parse(this._state.mdText);
+    if (this._state.markdownText) {
+      this._content.innerHTML = marked.parse(this._state.markdownText);
     }
     if (this._state.textColor) {
       this.style.setProperty("--text-color", this._state.textColor);
     }
-    if (this._state.bgColor !== undefined) {
-      this.style.setProperty("--bg-color", this._state.bgColor);
+    if (this._state.backgroundColor !== undefined) {
+      this.style.setProperty("--background-color", this._state.backgroundColor);
     }
     if (this._state.borderRadius !== undefined) {
       this.style.setProperty("--border-radius", (this._state.borderRadius * 50) + "vh");
@@ -185,13 +185,13 @@ export default class MarkdownGraphic extends HTMLElement {
       this.style.setProperty("--scale-all", this._state.scaleAll * 0.5);
     }
     if (this._state.fontScale !== undefined) {
-      this.style.setProperty("--font-scale", this._state.fontScale);
+      this.style.setProperty("--font-scale", (3 * this._state.fontScale) + "vh");
     }
-    if (this._state.bgScaleX !== undefined) {
-      this.style.setProperty("--bg-scale-x", this._state.bgScaleX);
+    if (this._state.backgroundScaleX !== undefined) {
+      this.style.setProperty("--background-scale-x", this._state.backgroundScaleX);
     }
-    if (this._state.bgScaleY !== undefined) {
-      this.style.setProperty("--bg-scale-y", this._state.bgScaleY);
+    if (this._state.backgroundScaleY !== undefined) {
+      this.style.setProperty("--background-scale-y", this._state.backgroundScaleY);
     }
   }
 }

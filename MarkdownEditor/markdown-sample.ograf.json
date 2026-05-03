@@ -16,11 +16,11 @@
   "schema": {
     "type": "object",
     "properties": {
-      "mdText": {
+      "markdownText": {
         "type": "string",
         "title": "Markdown Text",
         "gddType": "multi-line",
-        "default": "# H1\n## H2\n\n**Bold**  \n*italic*  \n~~Strikethrough~~\n\n---\n\n- Item1\n- Item2\n\n| Column 1 | Column 2 |\n| -------- | -------- |\n| Text 1   | Text 2   |\n"
+        "default": "# H1\n\n**Bold**  \n*italic*  \n~~Strikethrough~~  \n`inline code`\n\n> Blockquote\n\n---\n\n- Item1\n- Item2\n\n1. Number 1\n2. Number 2\n\n| Column 1 | Column 2 |\n| -------- | -------- |\n| Text 1   | Text 2   |\n"
       },
       "textColor": {
         "type": "string",
@@ -28,7 +28,7 @@
         "gddType": "color-rrggbb",
         "default": "#ffffff"
       },
-      "bgColor": {
+      "backgroundColor": {
         "type": "string",
         "title": "Background Color",
         "gddType": "color-rrggbbaa",
@@ -55,14 +55,14 @@
         "minimum": 0.0,
         "maximum": 5.0
       },
-      "bgScaleX": {
+      "backgroundScaleX": {
         "type": "number",
         "title": "Background Scale X",
         "default": 1.0,
         "minimum": 0.0,
         "maximum": 5.0
       },
-      "bgScaleY": {
+      "backgroundScaleY": {
         "type": "number",
         "title": "Background Scale Y",
         "default": 1.0,
